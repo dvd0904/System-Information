@@ -3,29 +3,11 @@
 #include "sysInfo.h"
 #include "sysInfo.hpp"
 
-// int sysinfo_os(cJSON **js_result)
-// {
-//     auto retVal{-1};
+constexpr auto JSON_PRETTY_SPACES
+{
+    2
+};
 
-//     try
-//     {
-//         if (js_result)
-//         {
-//             SysInfo info;
-//             const auto &os{info.os()};
-//             *js_result = cJSON_Parse(os.dump().c_str());
-//             retVal = 0;
-//         }
-//     }
-//     // LCOV_EXCL_START
-//     catch (...)
-//     {
-//     }
-
-//     // LCOV_EXCL_STOP
-
-//     return retVal;
-// }
 
 class SysInfoPrint
 {
@@ -33,7 +15,13 @@ class SysInfoPrint
         SysInfoPrint() = default;
         void func()
         {
+            my_data["hw"] = my_sysinfo.hardware();
+            my_data["os"] = my_sysinfo.os();
+        }
 
+        void printData()
+        {
+            std::cout << my_data.dump(JSON_PRETTY_SPACES) << std::endl;
         }
 
     private:
@@ -44,5 +32,8 @@ class SysInfoPrint
 
 int main()
 {
-    std::cout << "Hello\n";
+    // std::cout << "Hello\n";
+    SysInfoPrint printer;
+    printer.func();
+    printer.printData();
 }

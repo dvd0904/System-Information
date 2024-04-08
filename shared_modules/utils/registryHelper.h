@@ -20,6 +20,7 @@
 #include <cstdio>
 #include <memory>
 #include "encodingWindowsHelper.h"
+#include <iostream>
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-function"
@@ -31,7 +32,8 @@ namespace Utils
         public:
             Registry(const HKEY key, const std::string& subKey = "", const REGSAM access = KEY_READ)
                 : m_registryKey{openRegistry(key, subKey, access)}
-            {}
+            {
+            }
             ~Registry()
             {
                 close();
@@ -229,6 +231,8 @@ namespace Utils
                         "Error opening registry: " + subKey
                     };
                 }
+                else
+                    std::cout << "WTF\n";
 
                 return ret;
             }
