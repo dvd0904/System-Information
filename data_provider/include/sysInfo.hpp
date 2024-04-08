@@ -1,7 +1,6 @@
 #ifndef _SYS_INFO_HPP
 #define _SYS_INFO_HPP
 
-
 #include "sysInfoInterface.h"
 
 constexpr auto KByte{1024};
