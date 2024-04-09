@@ -22,10 +22,10 @@
 
 #include <iostream>
 
-constexpr auto CENTRAL_PROCESSOR_REGISTRY{"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0"};
-const std::string UNINSTALL_REGISTRY{"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall"};
+constexpr auto CENTRAL_PROCESSOR_REGISTRY {"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0"};
+const std::string UNINSTALL_REGISTRY {"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall"};
 
-constexpr auto test1{"SOFTWARE\\Microsoft\\SQMClient"};
+// constexpr auto test1{"SOFTWARE\\Microsoft\\SQMClient"};
 // constexpr auto test2{"SOFTWARE\\Microsoft\\Cryptography"};
 
 std::string SysInfo::getSerialNumber() const
@@ -124,15 +124,12 @@ nlohmann::json SysInfo::getOsInfo() const
 
 std::string SysInfo::getMachineId() const
 {
-    Utils::Registry reg(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Cryptography");
-    std::string test;
-    reg.string("MachineGuid", test);
-    std::cout << test << std::endl;
-    return reg.string("MachineGuid");
+    Utils::Registry reg(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\SQMClient");
+    return reg.string("MachineId");
 }
 
-// std::string SysInfo::getMachineGuid() const
-// {
-//     Utils::Registry reg(HKEY_LOCAL_MACHINE, test2);
-//     return reg.string("MachineGuid");
-// }
+std::string SysInfo::getMachineGuid() const
+{
+    Utils::Registry reg(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Cryptography");
+    return reg.string("MachineGuid");
+}

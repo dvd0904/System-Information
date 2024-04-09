@@ -10,7 +10,7 @@ nlohmann::json SysInfo::hardware()
     ret["cpu_cores"] = getCpuCores();
     ret["cpu_mhz"] = double(getCpuMHz());
     ret["machine_id"] = getMachineId();
-    // ret["machine_guid"] = getMachineGuid();
+    ret["machine_guid"] = getMachineGuid();
     // ret["disk_model"] = getDiskInfo("Model");
     // ret["disk_serialNumber"] = getDiskInfo("\"Serial Number\"");
     // ret["disk_firmwareVersion"] = getDiskInfo("\"Firmware Revision\"");

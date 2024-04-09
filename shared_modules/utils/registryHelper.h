@@ -30,7 +30,10 @@ namespace Utils
     class Registry final
     {
         public:
-            Registry(const HKEY key, const std::string& subKey = "", const REGSAM access = KEY_READ)
+            /*  Use KEY_WOW64_64KEY because if you run a 32 bit app in 64 bit, OS will redirect to HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node
+                This is Registry Redirection
+            */
+            Registry(const HKEY key, const std::string& subKey = "", REGSAM access = KEY_READ | KEY_WOW64_64KEY)
                 : m_registryKey{openRegistry(key, subKey, access)}
             {
             }
@@ -214,7 +217,7 @@ namespace Utils
             }
 
         private:
-            static HKEY openRegistry(const HKEY key, const std::string& subKey, const REGSAM access)
+            static HKEY openRegistry(const HKEY key, const std::string& subKey, REGSAM access)
             {
                 HKEY ret{nullptr};
                 const auto result

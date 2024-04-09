@@ -24,7 +24,7 @@ class SysInfo
         void getMemory(nlohmann::json& info) const;
         nlohmann::json getOsInfo() const;
         std::string getMachineId() const;
-        // std::string getMachineGuid() const;
+        std::string getMachineGuid() const;
 
 };
 
